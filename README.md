@@ -1,2 +1,53 @@
 # card
  Hover custom coad
+ 
+Code:
+
+selector{
+    --first-color: #5ddcff;
+    --second-color: #3c67e3;
+    --third-color: #4e00c2;
+}
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 132deg;
+  inherits: false;
+}
+selector::before, selector::after{
+    opacity: 0;
+    content: "";
+    transition: all 0.5s ease-in-out;
+}
+selector:hover::before, selector:hover::after{
+    position: absolute;
+    z-index: -1;
+    background-image: linear-gradient(
+    var(--rotate)
+    , var(--first-color), var(--second-color) 43%, var(--third-color));
+    animation: spin 2.5s linear infinite;
+    opacity: 1;
+}
+selector:hover::before {
+  width: 94%;
+  height: 94%;
+  border-radius: 8px;
+  top: 3%;
+  left: 3%;
+}
+selector:hover::after {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  transform: scale(0.9);
+  filter: blur(70px);
+}
+@keyframes spin {
+  0% {
+    --rotate: 0deg;
+  }
+  100% {
+    --rotate: 360deg;
+  }
+}
